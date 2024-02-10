@@ -1,0 +1,825 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/24/2024 1:17:49 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-0IQQMLVI"
+  DTS:CreatorName="LAPTOP-0IQQMLVI\100ya"
+  DTS:DTSID="{D29B2293-1051-4910-9598-2B6AA79691B9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="1037"
+  DTS:ObjectName="STG_Sales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{09619977-4D66-42F5-B9EA-5C0F30887A42}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DEA087E7-C0F4-4900-B0FD-34B9AD9C6166}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="C_MRR_Sales">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{24735871-6AA3-425D-8DBD-E774F1F761DE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Start">
+      <DTS:VariableValue
+        DTS:DataType="7">1/24/2024 9:27:35 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\init Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{97b1e156-5f02-4e28-a0a3-cb5372492fe2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="init Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF2DDCCE-D2E4-4971-B7BE-CA8089318505}"
+          SQLTask:SqlStatementSource="Select GETDATE() Start"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Start"
+            SQLTask:DtsVariableName="User::Start" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert into TranferTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4f4cf9f3-0f4f-4992-80cd-0b3467827206}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert into TranferTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DF2DDCCE-D2E4-4971-B7BE-CA8089318505}"
+          SQLTask:SqlStatementSource="insert into Transfer_Table ([EndDate],[NewRows],[Table_Name],[Package_Name],[Sol_Name],[StartDate])&#xA;values(getdate(),?,'STG_Sales','STG_Sales','Samsung_DM_Fact_Sales',?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::C_MRR_Sales"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::Start"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MRR to STG Sales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B04409AC-E579-40FA-8633-7CCB6E43E387}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MRR to STG Sales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MRR to STG Sales\MRR_Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MRR_Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT I.IV, I.IVDATE, I.CUST, CONVERT(DATE, I.IVDATE) ORDER_DATE,
+I.AGENT, I.[ZONE], II.PART, II.QUANT, II.PRICE, II.PRICED
+FROM MRR_INVOICES I 
+JOIN MRR_INVOICEITEMS II ON I.IV = II.IV</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRR to STG Sales\MRR_Sales.Connections[OleDbConnection]"
+                  connectionManagerID="{DF2DDCCE-D2E4-4971-B7BE-CA8089318505}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IV]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IV]"
+                      name="IV"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[IVDATE]"
+                      length="20"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IVDATE]"
+                      name="IVDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[CUST]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[CUST]"
+                      name="CUST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ORDER_DATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[ORDER_DATE]"
+                      length="10"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ORDER_DATE]"
+                      name="ORDER_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[AGENT]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[AGENT]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[AGENT]"
+                      name="AGENT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[ZONE]"
+                      length="20"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ZONE]"
+                      name="ZONE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PART]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PART]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PART]"
+                      name="PART"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[QUANT]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[QUANT]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[QUANT]"
+                      name="QUANT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PRICE]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICE]"
+                      name="PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICED]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PRICED]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICED]"
+                      name="PRICED"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      dataType="i4"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="IVDATE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      dataType="i8"
+                      name="CUST" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[ORDER_DATE]"
+                      dataType="wstr"
+                      length="10"
+                      name="ORDER_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[AGENT]"
+                      dataType="i8"
+                      name="AGENT" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="ZONE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PART]"
+                      dataType="i4"
+                      name="PART" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[QUANT]"
+                      dataType="i8"
+                      name="QUANT" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PRICE]"
+                      dataType="r8"
+                      name="PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].ExternalColumns[PRICED]"
+                      dataType="r8"
+                      name="PRICED" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      name="IV" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[IVDATE]"
+                      name="IVDATE" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      dataType="i8"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      name="CUST" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ORDER_DATE]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ORDER_DATE]"
+                      name="ORDER_DATE" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[AGENT]"
+                      dataType="i8"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[AGENT]"
+                      name="AGENT" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ZONE]"
+                      name="ZONE" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PART]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PART]"
+                      name="PART" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[QUANT]"
+                      dataType="i8"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[QUANT]"
+                      name="QUANT" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PRICE]"
+                      dataType="r8"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PRICE]"
+                      name="PRICE" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PRICED]"
+                      dataType="r8"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[PRICED]"
+                      name="PRICED" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRR to STG Sales\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::C_MRR_Sales</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\MRR to STG Sales\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRR to STG Sales\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\MRR to STG Sales\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRR to STG Sales\STG_Sales"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG_Sales"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[STG_Sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRR to STG Sales\STG_Sales.Connections[OleDbConnection]"
+                  connectionManagerID="{DF2DDCCE-D2E4-4971-B7BE-CA8089318505}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[IV]"
+                      cachedDataType="i4"
+                      cachedName="IV"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IV]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[IVDATE]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="IVDATE"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[IVDATE]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[IVDATE]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[CUST]"
+                      cachedDataType="i8"
+                      cachedName="CUST"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[CUST]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[CUST]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[ORDER_DATE]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ORDER_DATE"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[ORDER_DATE]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ORDER_DATE]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[AGENT]"
+                      cachedDataType="i8"
+                      cachedName="AGENT"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[AGENT]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[AGENT]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[ZONE]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ZONE"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[ZONE]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[ZONE]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[PART]"
+                      cachedDataType="i4"
+                      cachedName="PART"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PART]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PART]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[QUANT]"
+                      cachedDataType="i8"
+                      cachedName="QUANT"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[QUANT]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[QUANT]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[PRICE]"
+                      cachedDataType="r8"
+                      cachedName="PRICE"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICE]" />
+                    <inputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].Columns[PRICED]"
+                      cachedDataType="r8"
+                      cachedName="PRICED"
+                      externalMetadataColumnId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PRICED]"
+                      lineageId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output].Columns[PRICED]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      dataType="i4"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="IVDATE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[CUST]"
+                      dataType="i4"
+                      name="CUST" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[ORDER_DATE]"
+                      dataType="wstr"
+                      length="10"
+                      name="ORDER_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[AGENT]"
+                      dataType="i4"
+                      name="AGENT" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="ZONE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PART]"
+                      dataType="i4"
+                      name="PART" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[QUANT]"
+                      dataType="i4"
+                      name="QUANT" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      dataType="r8"
+                      name="PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input].ExternalColumns[PRICED]"
+                      dataType="r8"
+                      name="PRICED" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRR to STG Sales\STG_Sales.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\STG_Sales.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRR to STG Sales\STG_Sales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRR to STG Sales\STG_Sales.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MRR to STG Sales.Paths[OLE DB Source Output]"
+              endId="Package\MRR to STG Sales\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\MRR to STG Sales\MRR_Sales.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\MRR to STG Sales.Paths[Row Count Output 1]"
+              endId="Package\MRR to STG Sales\STG_Sales.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\MRR to STG Sales\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FC29121F-1AFC-434C-89AA-2CC416252147}"
+      DTS:From="Package\init Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MRR to STG Sales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7F0B57F9-7B94-45AE-B859-81F5CBC77C54}"
+      DTS:From="Package\MRR to STG Sales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\insert into TranferTable" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\MRR to STG Sales"
+          TopLeft="303.124995483086,107.899998070598" />
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\init Start"
+          TopLeft="320.87499855645,32.4999994188547" />
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\insert into TranferTable"
+          TopLeft="285.874999077991,174.199996885061" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="382.999997019768,75.1666660855214">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.7333319850763"
+              Start="0,0"
+              End="0,25.2333319850763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2333319850763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="383.166663947205,150.566664737264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.6333321477967"
+              Start="0,0"
+              End="0,16.1333321477967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.1333321477967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MRR to STG Sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\MRR to STG Sales\Row Count"
+          TopLeft="299.374995538965,111.149998012483" />
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\MRR to STG Sales\MRR_Sales"
+          TopLeft="301.249995511025,33.1499994072318" />
+        <EdgeLayout
+          Id="Package\MRR to STG Sales.Paths[OLE DB Source Output]"
+          TopLeft="365.979162191662,75.8166660738985">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3333319385846"
+              Start="0,0"
+              End="0,27.8333319385846">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8333319385846" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.333333333334,42.6666666666667"
+          Id="Package\MRR to STG Sales\STG_Sales"
+          TopLeft="301.249995511025,192.39999655962" />
+        <EdgeLayout
+          Id="Package\MRR to STG Sales.Paths[Row Count Output 1]"
+          TopLeft="365.479162191662,153.81666467915">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.5833318804702"
+              Start="0,0"
+              End="0,31.0833318804702">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.0833318804702" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRR to STG Sales\MRR_Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRR to STG Sales\STG_Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

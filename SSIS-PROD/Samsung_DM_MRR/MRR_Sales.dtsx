@@ -1,0 +1,2166 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/24/2024 1:09:45 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-0IQQMLVI"
+  DTS:CreatorName="LAPTOP-0IQQMLVI\100ya"
+  DTS:DTSID="{68D723DB-70F0-4376-A5A5-BC84913CD5C3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="1037"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{8CBC8BCB-5F88-4DA9-A6A0-D8D0C82C4A4B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5260B465-38CF-4E7E-A6D9-D15B99CC0333}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="C_INVOICEITEMS">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BBC1D1C5-849B-40CB-8B5F-5C04D57B8D3A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="C_INVOICES">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59C93D92-1D8B-4C70-B333-0AF8440B4848}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Start">
+      <DTS:VariableValue
+        DTS:DataType="7">1/24/2024 3:11:23 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DB to MRR Sales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FDED5EF7-5A16-44D7-AB30-D3B17E99954C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DB to MRR Sales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DB to MRR Sales\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\Data Conversion.Inputs[Data Conversion Input].Columns[IV]"
+                      cachedDataType="i8"
+                      cachedName="IV"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[IV]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DB to MRR Sales\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IV]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IV]"
+                      name="Copy of IV"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[IV]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DB to MRR Sales\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\DB_INVOICEITEMS"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB_INVOICEITEMS"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[INVOICEITEMS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Connections[OleDbConnection]"
+                  connectionManagerID="{D1AF00D1-1897-423C-BF0D-3580893D1D08}:invalid"
+                  connectionManagerRefId="{D1AF00D1-1897-423C-BF0D-3580893D1D08}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[IV]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[IV]"
+                      name="IV"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PART]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PART]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PART]"
+                      name="PART"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PRICE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICE]"
+                      name="PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[QUANT]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[QUANT]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[QUANT]"
+                      name="QUANT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICED]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PRICED]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICED]"
+                      name="PRICED"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      dataType="i8"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PART]"
+                      dataType="i8"
+                      name="PART" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PRICE]"
+                      dataType="r8"
+                      name="PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[QUANT]"
+                      dataType="i8"
+                      name="QUANT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[QPRICE]"
+                      dataType="r8"
+                      name="QPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[CURRENCY]"
+                      dataType="i8"
+                      name="CURRENCY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[LINE]"
+                      dataType="i8"
+                      name="LINE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[ORDI]"
+                      dataType="i8"
+                      name="ORDI" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[T$PERCENT]"
+                      dataType="r8"
+                      name="T$PERCENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[UDATE]"
+                      dataType="i8"
+                      name="UDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[T$USER]"
+                      dataType="i8"
+                      name="T$USER" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[KLINE]"
+                      dataType="i8"
+                      name="KLINE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[TQUANT]"
+                      dataType="i8"
+                      name="TQUANT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[TUNIT]"
+                      dataType="i8"
+                      name="TUNIT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PURTAXPERCENT]"
+                      dataType="r8"
+                      name="PURTAXPERCENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[TRANS]"
+                      dataType="i8"
+                      name="TRANS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[TOTPERCENT]"
+                      dataType="r8"
+                      name="TOTPERCENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[NONSTANDARD]"
+                      dataType="i8"
+                      name="NONSTANDARD" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[CALQPRICE]"
+                      dataType="r8"
+                      name="CALQPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[SUPPART]"
+                      dataType="i8"
+                      name="SUPPART" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[IVCOST]"
+                      dataType="r8"
+                      name="IVCOST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[DUTYCOST]"
+                      dataType="r8"
+                      name="DUTYCOST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[BUDGET]"
+                      dataType="i8"
+                      name="BUDGET" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[VATFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="VATFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PRSOURCE]"
+                      dataType="wstr"
+                      length="1"
+                      name="PRSOURCE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[STORNOFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="STORNOFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[COSTC]"
+                      dataType="i8"
+                      name="COSTC" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[CREDITCOST]"
+                      dataType="r8"
+                      name="CREDITCOST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT]"
+                      dataType="i8"
+                      name="ACCOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[BRANCH]"
+                      dataType="i8"
+                      name="BRANCH" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[IVDATE]"
+                      dataType="i8"
+                      name="IVDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[ICURRENCY]"
+                      dataType="i8"
+                      name="ICURRENCY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[IEXCHANGE]"
+                      dataType="r8"
+                      name="IEXCHANGE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[COUNTRY]"
+                      dataType="i8"
+                      name="COUNTRY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[CREDITFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="CREDITFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[AGENT]"
+                      dataType="i8"
+                      name="AGENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[COMMISSION]"
+                      dataType="r8"
+                      name="COMMISSION" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[XKLINE]"
+                      dataType="i8"
+                      name="XKLINE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].ExternalColumns[PRICED]"
+                      dataType="r8"
+                      name="PRICED" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      name="IV" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PART]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PART]"
+                      name="PART" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PRICE]"
+                      dataType="r8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PRICE]"
+                      name="PRICE" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[QUANT]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[QUANT]"
+                      name="QUANT" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PRICED]"
+                      dataType="r8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Error Output].Columns[PRICED]"
+                      name="PRICED" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\DB_INVOICES"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB_INVOICES"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[INVOICES]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\DB_INVOICES.Connections[OleDbConnection]"
+                  connectionManagerID="{D1AF00D1-1897-423C-BF0D-3580893D1D08}:invalid"
+                  connectionManagerRefId="{D1AF00D1-1897-423C-BF0D-3580893D1D08}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVDATE]"
+                      length="20"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IVDATE]"
+                      name="IVDATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IV]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IV]"
+                      name="IV"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[CUST]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[CUST]"
+                      name="CUST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[AGENT]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[AGENT]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[AGENT]"
+                      name="AGENT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ZONE]"
+                      length="20"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[ZONE]"
+                      name="ZONE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[DESTCODE]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DESTCODE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[DESTCODE]"
+                      name="DESTCODE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="IVDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVNUM]"
+                      dataType="wstr"
+                      length="16"
+                      name="IVNUM" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DOC]"
+                      dataType="i8"
+                      name="DOC" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IV]"
+                      dataType="i4"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[QPRICE]"
+                      dataType="r8"
+                      name="QPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TOTPRICE]"
+                      dataType="r8"
+                      name="TOTPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CURRENCY]"
+                      dataType="i8"
+                      name="CURRENCY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      dataType="i8"
+                      name="CUST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DEBIT]"
+                      dataType="wstr"
+                      length="1"
+                      name="DEBIT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVREF]"
+                      dataType="wstr"
+                      length="10"
+                      name="IVREF" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[VAT]"
+                      dataType="r8"
+                      name="VAT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[UDATE]"
+                      dataType="i8"
+                      name="UDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[T$USER]"
+                      dataType="i8"
+                      name="T$USER" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PRINTED]"
+                      dataType="wstr"
+                      length="1"
+                      name="PRINTED" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[FINAL]"
+                      dataType="wstr"
+                      length="1"
+                      name="FINAL" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ORD]"
+                      dataType="i8"
+                      name="ORD" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DISCOUNT]"
+                      dataType="r8"
+                      name="DISCOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DISPRICE]"
+                      dataType="r8"
+                      name="DISPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[MONTHLY]"
+                      dataType="wstr"
+                      length="1"
+                      name="MONTHLY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PAY]"
+                      dataType="i8"
+                      name="PAY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[FNCPATTERN]"
+                      dataType="i8"
+                      name="FNCPATTERN" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PAYDATE]"
+                      dataType="i8"
+                      name="PAYDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[FNCTRANS]"
+                      dataType="i8"
+                      name="FNCTRANS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[BOOKNUM]"
+                      dataType="wstr"
+                      length="16"
+                      name="BOOKNUM" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[AGENT]"
+                      dataType="i8"
+                      name="AGENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PIV]"
+                      dataType="i8"
+                      name="PIV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CALQPRICE]"
+                      dataType="r8"
+                      name="CALQPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CHECKING]"
+                      dataType="wstr"
+                      length="1"
+                      name="CHECKING" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IMPFILE]"
+                      dataType="i8"
+                      name="IMPFILE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IMPFIVTYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="IMPFIVTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CASH]"
+                      dataType="i8"
+                      name="CASH" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TOCASH]"
+                      dataType="i8"
+                      name="TOCASH" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[NOVATPRICE]"
+                      dataType="r8"
+                      name="NOVATPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[VATPRICE]"
+                      dataType="r8"
+                      name="VATPRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[WARHS]"
+                      dataType="i8"
+                      name="WARHS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TOWARHS]"
+                      dataType="i8"
+                      name="TOWARHS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[LCURRENCY]"
+                      dataType="i8"
+                      name="LCURRENCY" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[LEXCHANGE]"
+                      dataType="r8"
+                      name="LEXCHANGE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[WTAX]"
+                      dataType="r8"
+                      name="WTAX" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[AFTERWTAX]"
+                      dataType="r8"
+                      name="AFTERWTAX" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[WTAXPERCENT]"
+                      dataType="r8"
+                      name="WTAXPERCENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVBALANCE]"
+                      dataType="r8"
+                      name="IVBALANCE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ADVFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ADVFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT]"
+                      dataType="i8"
+                      name="ACCOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[CASHPAYMENT]"
+                      dataType="r8"
+                      name="CASHPAYMENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[STORNOFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="STORNOFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TAX]"
+                      dataType="i8"
+                      name="TAX" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[INTERNAL]"
+                      dataType="wstr"
+                      length="1"
+                      name="INTERNAL" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[BRANCH]"
+                      dataType="i8"
+                      name="BRANCH" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[LIV]"
+                      dataType="i8"
+                      name="LIV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ADJPRICEFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="ADJPRICEFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[FNCITEMSFLAG]"
+                      dataType="wstr"
+                      length="1"
+                      name="FNCITEMSFLAG" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DETAILS]"
+                      dataType="wstr"
+                      length="24"
+                      name="DETAILS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[OWNER]"
+                      dataType="i8"
+                      name="OWNER" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PHONE]"
+                      dataType="i8"
+                      name="PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[DESTCODE]"
+                      dataType="i8"
+                      name="DESTCODE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[SHIPTYPE]"
+                      dataType="i8"
+                      name="SHIPTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[BALDATE]"
+                      dataType="i8"
+                      name="BALDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PLIST]"
+                      dataType="i8"
+                      name="PLIST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[T$PERCENT]"
+                      dataType="r8"
+                      name="T$PERCENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PACK]"
+                      dataType="i8"
+                      name="PACK" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[MWEIGHT]"
+                      dataType="r8"
+                      name="MWEIGHT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[WEIGHT]"
+                      dataType="r8"
+                      name="WEIGHT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[AIRWAYBILL]"
+                      dataType="wstr"
+                      length="20"
+                      name="AIRWAYBILL" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PATTERN]"
+                      dataType="i8"
+                      name="PATTERN" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[PATKLINE]"
+                      dataType="i8"
+                      name="PATKLINE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[UDATESECONDS]"
+                      dataType="i8"
+                      name="UDATESECONDS" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[TAXSUM]"
+                      dataType="r8"
+                      name="TAXSUM" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[IVCODEID]"
+                      dataType="i8"
+                      name="IVCODEID" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].ExternalColumns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="ZONE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[IVDATE]"
+                      name="IVDATE" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[IV]"
+                      name="IV" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      name="CUST" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[AGENT]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[AGENT]"
+                      name="AGENT" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[ZONE]"
+                      name="ZONE" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[DESTCODE]"
+                      dataType="i8"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Error Output].Columns[DESTCODE]"
+                      name="DESTCODE" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[FACT_Sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[FACT_Sales]) [refTable]
+where [refTable].[Order_ID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Order_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Order_Date" dataType="DT_STR" length="30" precision="0" scale="0" codePage="1255"/&gt;&lt;referenceColumn name="CustomerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AgentID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Qty" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Price" dataType="DT_NUMERIC" length="0" precision="9" scale="2" codePage="0"/&gt;&lt;referenceColumn name="Discount" dataType="DT_NUMERIC" length="0" precision="9" scale="2" codePage="0"/&gt;&lt;referenceColumn name="Total" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IV]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  connectionManagerRefId="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input].Columns[IV]"
+                      cachedDataType="i4"
+                      cachedName="IV"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IV]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Order_ID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\Lookup 1"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup 1"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[FACT_Sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[FACT_Sales]) [refTable]
+where [refTable].[Order_ID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Order_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Order_Date" dataType="DT_STR" length="30" precision="0" scale="0" codePage="1255"/&gt;&lt;referenceColumn name="CustomerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AgentID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritoryID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Qty" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Price" dataType="DT_NUMERIC" length="0" precision="9" scale="2" codePage="0"/&gt;&lt;referenceColumn name="Discount" dataType="DT_NUMERIC" length="0" precision="9" scale="2" codePage="0"/&gt;&lt;referenceColumn name="Total" dataType="DT_NUMERIC" length="0" precision="10" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IV]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\Lookup 1.Connections[OleDbConnection]"
+                  connectionManagerID="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  connectionManagerRefId="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input].Columns[Copy of IV]"
+                      cachedDataType="i4"
+                      cachedName="Copy of IV"
+                      lineageId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IV]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Order_ID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\MRR_INVOICEITEMS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRR_INVOICEITEMS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[MRR_INVOICEITEMS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Connections[OleDbConnection]"
+                  connectionManagerID="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  connectionManagerRefId="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[IV]"
+                      cachedDataType="i8"
+                      cachedName="IV"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[IV]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[PART]"
+                      cachedDataType="i8"
+                      cachedName="PART"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PART]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PART]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[PRICE]"
+                      cachedDataType="r8"
+                      cachedName="PRICE"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICE]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[QUANT]"
+                      cachedDataType="i8"
+                      cachedName="QUANT"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[QUANT]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[QUANT]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[PRICED]"
+                      cachedDataType="r8"
+                      cachedName="PRICED"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PRICED]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output].Columns[PRICED]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].Columns[Copy of IV]"
+                      cachedDataType="i4"
+                      cachedName="Copy of IV"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[Copy of IV]"
+                      lineageId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of IV]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      dataType="i4"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PART]"
+                      dataType="i4"
+                      name="PART" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PRICE]"
+                      dataType="r8"
+                      name="PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[QUANT]"
+                      dataType="i8"
+                      name="QUANT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[PRICED]"
+                      dataType="r8"
+                      name="PRICED" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input].ExternalColumns[Copy of IV]"
+                      dataType="i4"
+                      name="Copy of IV" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\MRR_INVOICES"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRR_INVOICES"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[MRR_INVOICES]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DB to MRR Sales\MRR_INVOICES.Connections[OleDbConnection]"
+                  connectionManagerID="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  connectionManagerRefId="{55954D09-58ED-42D0-85EC-48898F799B9C}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[IVDATE]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="IVDATE"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[IVDATE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IVDATE]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[IV]"
+                      cachedDataType="i4"
+                      cachedName="IV"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[IV]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[CUST]"
+                      cachedDataType="i8"
+                      cachedName="CUST"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[CUST]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[CUST]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[AGENT]"
+                      cachedDataType="i8"
+                      cachedName="AGENT"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[AGENT]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[AGENT]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[ZONE]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ZONE"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[ZONE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[ZONE]" />
+                    <inputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].Columns[DESTCODE]"
+                      cachedDataType="i8"
+                      cachedName="DESTCODE"
+                      externalMetadataColumnId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[DESTCODE]"
+                      lineageId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output].Columns[DESTCODE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[IVDATE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="IVDATE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[IV]"
+                      dataType="i4"
+                      name="IV" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[CUST]"
+                      dataType="i8"
+                      name="CUST" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[AGENT]"
+                      dataType="i8"
+                      name="AGENT" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[ZONE]"
+                      codePage="1255"
+                      dataType="str"
+                      length="20"
+                      name="ZONE" />
+                    <externalMetadataColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input].ExternalColumns[DESTCODE]"
+                      dataType="i8"
+                      name="DESTCODE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\MRR_INVOICES.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\MRR_INVOICES.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DB to MRR Sales\MRR_INVOICES.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DB to MRR Sales\MRR_INVOICES.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::C_INVOICES</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DB to MRR Sales\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DB to MRR Sales\Row Count 1"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count 1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::C_INVOICEITEMS</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DB to MRR Sales\Row Count 1.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DB to MRR Sales\Row Count 1.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DB to MRR Sales\Row Count 1.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DB to MRR Sales.Paths[Data Conversion Output]"
+              endId="Package\DB to MRR Sales\Lookup 1.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\DB to MRR Sales\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[Lookup No Match Output]"
+              endId="Package\DB to MRR Sales\Row Count.Inputs[Row Count Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\DB to MRR Sales\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[Lookup No Match Output1]"
+              endId="Package\DB to MRR Sales\Row Count 1.Inputs[Row Count Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\DB to MRR Sales\Lookup 1.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[OLE DB Source Output]"
+              endId="Package\DB to MRR Sales\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DB to MRR Sales\DB_INVOICES.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[OLE DB Source Output1]"
+              endId="Package\DB to MRR Sales\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\DB to MRR Sales\DB_INVOICEITEMS.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[Row Count Output 1]"
+              endId="Package\DB to MRR Sales\MRR_INVOICES.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\DB to MRR Sales\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\DB to MRR Sales.Paths[Row Count Output 11]"
+              endId="Package\DB to MRR Sales\MRR_INVOICEITEMS.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\DB to MRR Sales\Row Count 1.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\init Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2B03B16A-54F0-4E6D-BFFF-30E61792A2EC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="init Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55954D09-58ED-42D0-85EC-48898F799B9C}"
+          SQLTask:SqlStatementSource="Select GETDATE() Start"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Start"
+            SQLTask:DtsVariableName="User::Start" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert into TranferTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{197CC563-D5FF-4F92-AAF7-397020EE4B15}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert into TranferTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55954D09-58ED-42D0-85EC-48898F799B9C}"
+          SQLTask:SqlStatementSource="insert into Transfer_Table ([EndDate],[NewRows],[Table_Name],[Package_Name],[Sol_Name],[StartDate])&#xA;values(getdate(),?,'MRR_INVOICES','MRR_Sales','Samsung_DM_MRR',?),(getdate(),?,'[dbo].[MRR_INVOICES]','MRR_Sales','Samsung_DM_MRR',?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::C_INVOICES"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::Start"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::C_INVOICEITEMS"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::Start"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SP_TRUNC_FOR_FACT"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B4A35AB1-200F-4036-8250-F2CE0348F05E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SP_TRUNC_FOR_FACT"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{55954D09-58ED-42D0-85EC-48898F799B9C}"
+          SQLTask:SqlStatementSource="EXEC SP_TRUNC_FOR_FACT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9F316A3E-6782-4B7D-B885-D0F09BD5FE55}"
+      DTS:From="Package\SP_TRUNC_FOR_FACT"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\init Start" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{5CCE9C1E-AB3A-46C4-88E4-6D323371689B}"
+      DTS:From="Package\init Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DB to MRR Sales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7114D25A-EE25-4C72-87C1-F8C00522D80F}"
+      DTS:From="Package\DB to MRR Sales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\insert into TranferTable" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\DB to MRR Sales"
+          TopLeft="229.999996572733,211.249996222556" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\SP_TRUNC_FOR_FACT"
+          TopLeft="211.874996842816,55.9166656787197" />
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\init Start"
+          TopLeft="247.499996311963,133.899997605681" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="306.354163244056,98.5833323453863">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3166652602951"
+              Start="0,0"
+              End="0,27.8166652602951">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8166652602951" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="308.416663109015,176.566664272348">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.6833319502075"
+              Start="0,0"
+              End="0,27.1833319502075">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1833319502075" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\insert into TranferTable"
+          TopLeft="211.24999685213,286.649994874299" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="307.958330045765,253.916662889222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.7333319850763"
+              Start="0,0"
+              End="0,25.2333319850763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2333319850763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DB to MRR Sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\DB to MRR Sales\DB_INVOICES"
+          TopLeft="52.499999217689,18.1999996745587" />
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\DB to MRR Sales\Row Count"
+          TopLeft="58.7499991245566,186.549996664226" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\DB to MRR Sales\MRR_INVOICES"
+          TopLeft="44.9999993294477,284.699994909167" />
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[Row Count Output 1]"
+          TopLeft="123.374999227002,229.216663330893">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.4833315782745"
+              Start="0,0"
+              End="0,47.9833315782745">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.9833315782745" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\DB to MRR Sales\DB_INVOICEITEMS"
+          TopLeft="229.374996582046,20.799999628067" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\DB to MRR Sales\Row Count 1"
+          TopLeft="246.874996321276,240.499995699525" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\DB to MRR Sales\MRR_INVOICEITEMS"
+          TopLeft="229.68749657739,311.999994421005" />
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[Row Count Output 11]"
+          TopLeft="317.947913115999,283.166662366192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.8333320548139"
+              Start="0,0"
+              End="0,21.3333320548139">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3333320548139" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="113.333333333334,42.6666666666667"
+          Id="Package\DB to MRR Sales\Lookup"
+          TopLeft="65.6249990221113,96.8499982681871" />
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[OLE DB Source Output]"
+          TopLeft="124.0624991199,60.8666663412253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.9833319269617"
+              Start="0,0"
+              End="0,28.4833319269617">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.4833319269617" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[Lookup No Match Output]"
+          TopLeft="123.354165740001,139.516664934854">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.0333317293725"
+              Start="0,0"
+              End="0,39.5333317293725">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5333317293725" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,13.9619783646862,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\DB to MRR Sales\Data Conversion"
+          TopLeft="241.249996405095,87.0999984425307" />
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[OLE DB Source Output1]"
+          TopLeft="317.312496493571,63.4666662947337">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.633332147797"
+              Start="0,0"
+              End="0,16.133332147797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.133332147797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="113.333333333334,42.6666666666667"
+          Id="Package\DB to MRR Sales\Lookup 1"
+          TopLeft="263.749996069819,163.116665585736" />
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[Data Conversion Output]"
+          TopLeft="320.166662904123,129.766665109197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.3500004765391"
+              Start="0,0"
+              End="0,25.8500004765391">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8500004765391" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DB to MRR Sales.Paths[Lookup No Match Output1]"
+          TopLeft="318.645829528881,205.783332252403">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.7166634471218"
+              Start="0,0"
+              End="0,27.2166634471218">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.2166634471218" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,7.80364422356089,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\DB_INVOICES">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\MRR_INVOICES">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\DB_INVOICEITEMS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\MRR_INVOICEITEMS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[FACT_Sales]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DB to MRR Sales\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[FACT_Sales]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

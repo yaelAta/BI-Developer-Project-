@@ -1,0 +1,2553 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/24/2024 9:12:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-0IQQMLVI"
+  DTS:CreatorName="LAPTOP-0IQQMLVI\100ya"
+  DTS:DTSID="{3ABA2A8A-381F-4EDF-BDCA-EA2D56E0E6E9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="1037"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{7B87E63F-2C5A-4F12-9F77-7D3A7832F397}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{37078EBC-AC22-4557-AE31-FF97E3FFAC66}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="C_DIM_CUST">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EAC66F32-98C9-46D9-9480-46E2060A3042}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Start">
+      <DTS:VariableValue
+        DTS:DataType="7">1/25/2024 10:41:19 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\init Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{15e221c1-deac-4937-a40c-61068c060ba5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="init Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D45FA902-D49B-4487-8062-5CCE0B5040AC}"
+          SQLTask:SqlStatementSource="Select GETDATE() Start"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Start"
+            SQLTask:DtsVariableName="User::Start" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\insert into TranferTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5cec832b-fec8-47e0-95cf-ec18663a58e0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="insert into TranferTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D45FA902-D49B-4487-8062-5CCE0B5040AC}"
+          SQLTask:SqlStatementSource="&#xA;insert into Transfer_Table ([EndDate],[NewRows],[Table_Name],[Package_Name],[Sol_Name],[StartDate])&#xA;values(getdate(),?,'DIM_Customers','DIM_Customers','Samsung_DM_DIM_Customers',?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::C_DIM_CUST"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="User::Start"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\STG to DIM Customers"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{79193d70-d58d-4570-a603-45f5e60cd66c}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="STG to DIM Customers"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\STG to DIM Customers\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input].Columns[BRANCH]"
+                      cachedDataType="i8"
+                      cachedName="BRANCH"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Conditional Split.Outputs[Online Customers]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Online Customers"
+                  synchronousInputId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(BRANCH)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Conditional Split.Outputs[Other Customers]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Other Customers"
+                  synchronousInputId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Data Conversion.Inputs[Data Conversion Input].Columns[Is_Active]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Is_Active"
+                      lineageId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output].Columns[Is_Active]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\STG to DIM Customers\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Is_Active]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Is_Active]"
+                      name="Copy of Is_Active"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output].Columns[Is_Active]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Derived Column.Inputs[Derived Column Input].Columns[BRANCH]"
+                      cachedDataType="i8"
+                      cachedName="BRANCH"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">200</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">200</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\STG to DIM Customers\Derived Column.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\STG to DIM Customers\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output].Columns[Is_Active]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output].Columns[Is_Active]"
+                      name="Is_Active"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"1"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"1"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DIM_Customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[CUST]"
+                      cachedDataType="i4"
+                      cachedName="CUST"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[CUSTNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CUSTNAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="ADDRESS"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[CITY]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="CITY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[STATENAME]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="STATENAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[COUNTRY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COUNTRY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[BRANCH]"
+                      cachedDataType="i8"
+                      cachedName="BRANCH"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Store_ID]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[BRANCH]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].Columns[Copy of Is_Active]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of Is_Active"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Is_Active]"
+                      lineageId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Is_Active]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
+                      dataType="i4"
+                      name="Customer_ID" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Store_ID]"
+                      dataType="i4"
+                      name="Store_ID" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="80"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="40"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Is_Active]"
+                      codePage="1255"
+                      dataType="str"
+                      length="1"
+                      name="Is_Active" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DIM_Customers] SET [Address] = ?,[City] = ?,[Country] = ?,[Name] = ?,[Region] = ? WHERE [Customer_ID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="ADDRESS"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[CITY]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="CITY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[COUNTRY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COUNTRY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[CUST]"
+                      cachedDataType="i4"
+                      cachedName="CUST"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[CUSTNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CUSTNAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]" />
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].Columns[STATENAME]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="STATENAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="80"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="wstr"
+                      length="40"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\OLE DB Command 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">update [DIM_Customers]
+set Is_Active = 0
+where [Customer_ID] = ? AND (Is_Active != 0 OR Is_Active IS NULL)</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\OLE DB Command 1.Connections[OleDbConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[Store_ID]"
+                      cachedDataType="i4"
+                      cachedName="Store_ID"
+                      externalMetadataColumnId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Store_ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::C_DIM_CUST</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\STG to DIM Customers\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Slowly Changing Dimension"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="Slowly Changing Dimension"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [Address], [City], [Country], [Customer_ID], [Name], [Region] FROM [dbo].[DIM_Customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Connections[LookupConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="ADDRESS"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Address]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[CITY]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="CITY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[City]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[COUNTRY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COUNTRY"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Country]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[CUST]"
+                      cachedDataType="i4"
+                      cachedName="CUST"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Customer_ID]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[CUSTNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CUSTNAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Name]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[STATENAME]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="STATENAME"
+                      externalMetadataColumnId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Region]"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="80"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[City]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Customer_ID]"
+                      dataType="i4"
+                      name="Customer_ID" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="40"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\STG_CUST"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="STG_CUST"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[STG_Customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT  C.CUST, C.CUSTNAME, C.BRANCH, D.[ADDRESS], D.CITY, S.STATENAME, CO.COUNTRY
+FROM MRR_CUSTOMERS C
+JOIN MRR_INVOICES I ON C.CUST= I.CUST
+JOIN MRR_DESTCODES D ON D.DESTCODE= I.DESTCODE
+JOIN MRR_STATES S ON D.[STATE]= S.STATEID
+JOIN MRR_COUNTRIES CO ON S.COUNTRY=CO.COUNTRYCODE</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\STG_CUST.Connections[OleDbConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUST]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUST]"
+                      name="CUST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUSTNAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CUSTNAME]"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUSTNAME]"
+                      name="CUSTNAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[BRANCH]"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]"
+                      name="BRANCH"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[ADDRESS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[ADDRESS]"
+                      length="80"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[ADDRESS]"
+                      name="ADDRESS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CITY]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CITY]"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CITY]"
+                      name="CITY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[STATENAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[STATENAME]"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[STATENAME]"
+                      name="STATENAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[COUNTRY]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[COUNTRY]"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[COUNTRY]"
+                      name="COUNTRY"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CUST]"
+                      dataType="i4"
+                      name="CUST" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CUSTNAME]"
+                      dataType="wstr"
+                      length="50"
+                      name="CUSTNAME" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[BRANCH]"
+                      dataType="i4"
+                      name="BRANCH" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[ADDRESS]"
+                      dataType="wstr"
+                      length="80"
+                      name="ADDRESS" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[CITY]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      name="CITY" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[STATENAME]"
+                      dataType="wstr"
+                      length="40"
+                      name="STATENAME" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].ExternalColumns[COUNTRY]"
+                      dataType="wstr"
+                      length="50"
+                      name="COUNTRY" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CUST]"
+                      name="CUST" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CUSTNAME]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CUSTNAME]"
+                      name="CUSTNAME" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[BRANCH]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[BRANCH]"
+                      name="BRANCH" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ADDRESS]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ADDRESS]"
+                      name="ADDRESS" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CITY]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[CITY]"
+                      name="CITY" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[STATENAME]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[STATENAME]"
+                      name="STATENAME" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[COUNTRY]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[COUNTRY]"
+                      name="COUNTRY" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\STG_CUST 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="STG_CUST 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[STG_Customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT D.*
+FROM [dbo].[DIM_Customers] D
+LEFT JOIN [dbo].[STG_Customers] M ON D.[Customer_ID] = M.[CUST]
+WHERE  M.[CUST] IS NULL and Is_Active = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1255</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\STG to DIM Customers\STG_CUST 1.Connections[OleDbConnection]"
+                  connectionManagerID="{D45FA902-D49B-4487-8062-5CCE0B5040AC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LAPTOP-0IQQMLVI.SA_Seals_DM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Store_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Store_ID]"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Store_ID]"
+                      name="Store_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="80"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[City]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Region]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Is_Active]"
+                      codePage="1255"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Is_Active]"
+                      length="1"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Is_Active]"
+                      name="Is_Active"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Customer_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Customer_ID]"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].Columns[Customer_ID]"
+                      name="Customer_ID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Store_ID]"
+                      dataType="i4"
+                      name="Store_ID" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="80"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="40"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Is_Active]"
+                      codePage="1255"
+                      dataType="str"
+                      length="1"
+                      name="Is_Active" />
+                    <externalMetadataColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output].ExternalColumns[Customer_ID]"
+                      dataType="i4"
+                      name="Customer_ID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Customer_ID]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Customer_ID]"
+                      name="Customer_ID" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Store_ID]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Store_ID]"
+                      name="Store_ID" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[City]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Is_Active]"
+                      codePage="1255"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[Is_Active]"
+                      name="Is_Active" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\STG to DIM Customers\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[CUST]"
+                      cachedDataType="i4"
+                      cachedName="CUST"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUST]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[CUSTNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CUSTNAME"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUSTNAME]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[BRANCH]"
+                      cachedDataType="i8"
+                      cachedName="BRANCH"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[BRANCH]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="ADDRESS"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[ADDRESS]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[CITY]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="CITY"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CITY]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[STATENAME]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="STATENAME"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[STATENAME]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1].Columns[COUNTRY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COUNTRY"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[COUNTRY]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[CUST]"
+                      cachedDataType="i4"
+                      cachedName="CUST"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUST]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[CUSTNAME]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CUSTNAME"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CUSTNAME]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[BRANCH]"
+                      cachedDataType="i8"
+                      cachedName="BRANCH"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[BRANCH]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[BRANCH]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[ADDRESS]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="ADDRESS"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[ADDRESS]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[CITY]"
+                      cachedCodepage="1255"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="CITY"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[CITY]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[STATENAME]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="STATENAME"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[STATENAME]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2].Columns[COUNTRY]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="COUNTRY"
+                      lineageId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output].Columns[COUNTRY]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]"
+                      dataType="i4"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUST]"
+                      name="CUST" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CUSTNAME]"
+                      name="CUSTNAME" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[BRANCH]"
+                      dataType="i8"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[BRANCH]"
+                      name="BRANCH" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[ADDRESS]"
+                      name="ADDRESS" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]"
+                      codePage="1255"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[CITY]"
+                      name="CITY" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[STATENAME]"
+                      name="STATENAME" />
+                    <outputColumn
+                      refId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1].Columns[COUNTRY]"
+                      name="COUNTRY" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\STG to DIM Customers.Paths[Changing Attribute Updates Output]"
+              endId="Package\STG to DIM Customers\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Changing Attribute Updates Output"
+              startId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Data Conversion Output]"
+              endId="Package\STG to DIM Customers\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+              name="Data Conversion Output"
+              startId="Package\STG to DIM Customers\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Derived Column Output]"
+              endId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\STG to DIM Customers\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Derived Column Output1]"
+              endId="Package\STG to DIM Customers\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\STG to DIM Customers\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[New Output]"
+              endId="Package\STG to DIM Customers\Row Count.Inputs[Row Count Input 1]"
+              name="New Output"
+              startId="Package\STG to DIM Customers\Slowly Changing Dimension.Outputs[New Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[OLE DB Source Output]"
+              endId="Package\STG to DIM Customers\Conditional Split.Inputs[Conditional Split Input]"
+              name="OLE DB Source Output"
+              startId="Package\STG to DIM Customers\STG_CUST.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[OLE DB Source Output1]"
+              endId="Package\STG to DIM Customers\OLE DB Command 1.Inputs[OLE DB Command Input]"
+              name="OLE DB Source Output"
+              startId="Package\STG to DIM Customers\STG_CUST 1.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Online Customers]"
+              endId="Package\STG to DIM Customers\Derived Column.Inputs[Derived Column Input]"
+              name="Online Customers"
+              startId="Package\STG to DIM Customers\Conditional Split.Outputs[Online Customers]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Other Customers]"
+              endId="Package\STG to DIM Customers\Union All.Inputs[Union All Input 2]"
+              name="Other Customers"
+              startId="Package\STG to DIM Customers\Conditional Split.Outputs[Other Customers]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Row Count Output 1]"
+              endId="Package\STG to DIM Customers\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\STG to DIM Customers\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\STG to DIM Customers.Paths[Union All Output 1]"
+              endId="Package\STG to DIM Customers\Derived Column 1.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\STG to DIM Customers\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4117ffd4-5bf8-402e-9cd2-cfdc5a7ee905}"
+      DTS:From="Package\init Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\STG to DIM Customers" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{ae886966-4bd1-47e1-a042-7bb992cb4b8c}"
+      DTS:From="Package\STG to DIM Customers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\insert into TranferTable" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\init Start"
+          TopLeft="94.999999478459,60" />
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\insert into TranferTable"
+          TopLeft="61.2499999813735,204.299997419714" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\STG to DIM Customers"
+          TopLeft="60.6249999906869,132.833330195149" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="154.812499734573,102.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.1666635284821"
+              Start="0,0"
+              End="0,22.6666635284821">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6666635284821" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="155.604166652697,175.499996861815">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.800000557899"
+              Start="0,0"
+              End="0,21.300000557899">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.300000557899" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\STG to DIM Customers">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="209.333333333334,44"
+          Id="Package\STG to DIM Customers\Slowly Changing Dimension"
+          TopLeft="221.145833105159,448.600003091692" />
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\STG to DIM Customers\Derived Column 1"
+          TopLeft="236.7812498766,316.066668456594" />
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\STG to DIM Customers\OLE DB Command 1"
+          TopLeft="591.718747999985,91.7500113323329" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\STG to DIM Customers\Derived Column"
+          TopLeft="368.041666713233,162.083334205051" />
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\STG to DIM Customers\Row Count"
+          TopLeft="188.052090870061,520.58750366412" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\STG to DIM Customers\Data Conversion"
+          TopLeft="242.927083168024,382.658335768331" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\STG to DIM Customers\Union All"
+          TopLeft="253.583333277454,241.350001290143" />
+        <NodeLayout
+          Size="130.666666666667,42.6666666666667"
+          Id="Package\STG to DIM Customers\STG_CUST"
+          TopLeft="248.916666610788,14.5999998372793" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\STG to DIM Customers\STG_CUST 1"
+          TopLeft="610.656247986015,23.354177374268" />
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\STG to DIM Customers\Insert Destination"
+          TopLeft="167.687497583218,591.600002394318" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\STG to DIM Customers\Conditional Split"
+          TopLeft="241.249999869615,82.1666671315822" />
+        <NodeLayout
+          Size="166.666666666667,42.6666666666667"
+          Id="Package\STG to DIM Customers\OLE DB Command"
+          TopLeft="364.697914661995,525.13750358276" />
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Changing Attribute Updates Output]"
+          TopLeft="359.368055327381,492.600003091692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.6631926679472,32.5375004910678"
+              Start="0,0"
+              End="88.6631926679472,25.0375004910678">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.16308490156979" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.16308490156979"
+                    Point2="0,13.1630849015698"
+                    Point3="4,13.1630849015698" />
+                  <mssgle:LineSegment
+                    End="84.6631926679472,13.1630849015698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.6631926679472,13.1630849015698"
+                    Point2="88.6631926679472,13.1630849015698"
+                    Point3="88.6631926679472,17.1630849015698" />
+                  <mssgle:LineSegment
+                    End="88.6631926679472,25.0375004910678" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.2023099160265,18.1630849015698,157.0678125,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Union All Output 1]"
+          TopLeft="316.51562491036,284.016667956809">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.0500004997846"
+              Start="0,0"
+              End="0,24.5500004997846">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5500004997846" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Row Count Output 1]"
+          TopLeft="251.703127559973,563.254170330787">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.3458320635311"
+              Start="0,0"
+              End="0,20.8458320635311">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.8458320635311" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Other Customers]"
+          TopLeft="294.97222212909,124.833333798249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.516667491894"
+              Start="0,0"
+              End="0,109.016667491894">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,109.016667491894" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-38.01009765625,49.6338220271968,76.0201953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Online Customers]"
+          TopLeft="343.916666536281,124.833333798249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.458333510285,37.2500004068021"
+              Start="0,0"
+              End="101.458333510285,29.7500004068021">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.1269037184983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.1269037184983"
+                    Point2="0,15.1269037184983"
+                    Point3="4,15.1269037184983" />
+                  <mssgle:LineSegment
+                    End="97.458333510285,15.1269037184983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97.458333510285,15.1269037184983"
+                    Point2="101.458333510285,15.1269037184983"
+                    Point3="101.458333510285,19.1269037184983" />
+                  <mssgle:LineSegment
+                    End="101.458333510285,29.7500004068021" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="11.1090690988925,20.1269037184983,79.2401953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[OLE DB Source Output1]"
+          TopLeft="680.187497993,66.0208440409347">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.7291672913982"
+              Start="0,0"
+              End="0,18.2291672913982">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.2291672913982" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[OLE DB Source Output]"
+          TopLeft="316.749999906868,57.2666665039459">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24.9000006276363"
+              Start="0,0"
+              End="0,17.4000006276363">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4000006276363" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[New Output]"
+          TopLeft="292.25694421627,492.600003091692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-38.5381866795421,27.987500572428"
+              Start="0,0"
+              End="-38.5381866795421,20.487500572428">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.32237696988236" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.32237696988236"
+                    Point2="0,11.3223769698824"
+                    Point3="-4,11.3223769698824" />
+                  <mssgle:LineSegment
+                    End="-34.5381866795421,11.3223769698824" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-34.5381866795421,11.3223769698824"
+                    Point2="-38.5381866795421,11.3223769698824"
+                    Point3="-38.5381866795421,15.3223769698824" />
+                  <mssgle:LineSegment
+                    End="-38.5381866795421,20.487500572428" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-46.360480058521,16.3223769698824,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Derived Column Output1]"
+          TopLeft="320.187499855645,358.73333512326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.925000645071"
+              Start="0,0"
+              End="0,16.425000645071">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.425000645071" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Derived Column Output]"
+          TopLeft="445.375000046566,204.750000871718">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-112.236111213557,36.600000418425"
+              Start="0,0"
+              End="-112.236111213557,29.100000418425">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.6741867987636" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.6741867987636"
+                    Point2="0,21.6741867987636"
+                    Point3="-4,21.6741867987636" />
+                  <mssgle:LineSegment
+                    End="-108.236111213557,21.6741867987636" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-108.236111213557,21.6741867987636"
+                    Point2="-112.236111213557,21.6741867987636"
+                    Point3="-112.236111213557,25.6741867987636" />
+                  <mssgle:LineSegment
+                    End="-112.236111213557,29.100000418425" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\STG to DIM Customers.Paths[Data Conversion Output]"
+          TopLeft="323.703124803258,425.325002434998">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.2750006566943"
+              Start="0,0"
+              End="0,15.7750006566943">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.7750006566943" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\STG to DIM Customers\Slowly Changing Dimension">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{D45FA902-D49B-4487-8062-5CCE0B5040AC}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[DIM_Customers]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[ADDRESS]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Address&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[CITY]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;City&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[COUNTRY]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Country&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[CUST]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Customer_ID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Derived Column 1.Outputs[Derived Column Output].Columns[Is_Active]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Is_Active&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[CUSTNAME]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Name&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Union All.Outputs[Union All Output 1].Columns[STATENAME]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Region&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;true&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\STG to DIM Customers\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\STG to DIM Customers\STG_CUST 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\STG to DIM Customers\STG_CUST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="LAPTOP-0IQQMLVI.SA_Seals_DM"
+  DTS:DTSID="{7D98BB6B-6A78-4786-BC4A-69C1FFE2BAD4}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="InitialCatalog">@[$Project::DB]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=LAPTOP-0IQQMLVI;Initial Catalog=SA_Sales_DM_DEV;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Samsung_DM_DIM_Stores-{7D98BB6B-6A78-4786-BC4A-69C1FFE2BAD4}LAPTOP-0IQQMLVI.SA_Seals_DM;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

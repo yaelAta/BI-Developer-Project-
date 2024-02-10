@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="LAPTOP-0IQQMLVI.PriorityERP"
+  DTS:DTSID="{D1AF00D1-1897-423C-BF0D-3580893D1D08}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=LAPTOP-0IQQMLVI;Initial Catalog=PriorityERP;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Samsung_DM_MRR-{D1AF00D1-1897-423C-BF0D-3580893D1D08}LAPTOP-0IQQMLVI.PriorityERP;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

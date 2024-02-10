@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34301.259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_MRR", "Samsung_DM_MRR.dtproj", "{1DEBC009-5B4B-40F8-8367-06CB97940328}"
+EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_Fact_Sales", "..\Samsung_DM_Fact_Sales\Samsung_DM_Fact_Sales.dtproj", "{894428E2-02A9-4171-82BD-12B43C4CC782}"
+EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_DIM_Customers", "..\Samsung_DM_DIM_Customers\Samsung_DM_DIM_Customers.dtproj", "{542FBBB2-2C81-43FC-BD57-0C72C8142891}"
+EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_DIM_Products", "..\Samsung_DM_DIM_Products\Samsung_DM_DIM_Products.dtproj", "{544449EC-E3EE-412B-A1EB-90FAA4F42621}"
+EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_DIM_Employees", "..\Samsung_DM_DIM_Employees\Samsung_DM_DIM_Employees.dtproj", "{8841110A-8102-4E78-8111-636676BDD1F7}"
+EndProject
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Samsung_DM_DIM_Stores", "..\Samsung_DM_DIM_Stores\Samsung_DM_DIM_Stores.dtproj", "{DF324813-4FD3-416E-B2E1-5D13FF2E6844}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DEBC009-5B4B-40F8-8367-06CB97940328}.Development|Default.ActiveCfg = Development
+		{1DEBC009-5B4B-40F8-8367-06CB97940328}.Development|Default.Build.0 = Development
+		{894428E2-02A9-4171-82BD-12B43C4CC782}.Development|Default.ActiveCfg = Development
+		{894428E2-02A9-4171-82BD-12B43C4CC782}.Development|Default.Build.0 = Development
+		{542FBBB2-2C81-43FC-BD57-0C72C8142891}.Development|Default.ActiveCfg = Development
+		{542FBBB2-2C81-43FC-BD57-0C72C8142891}.Development|Default.Build.0 = Development
+		{544449EC-E3EE-412B-A1EB-90FAA4F42621}.Development|Default.ActiveCfg = Development
+		{544449EC-E3EE-412B-A1EB-90FAA4F42621}.Development|Default.Build.0 = Development
+		{8841110A-8102-4E78-8111-636676BDD1F7}.Development|Default.ActiveCfg = Development
+		{8841110A-8102-4E78-8111-636676BDD1F7}.Development|Default.Build.0 = Development
+		{DF324813-4FD3-416E-B2E1-5D13FF2E6844}.Development|Default.ActiveCfg = Development
+		{DF324813-4FD3-416E-B2E1-5D13FF2E6844}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {037F8FBB-0459-43DE-9C3B-90F738F920AF}
+	EndGlobalSection
+EndGlobal
